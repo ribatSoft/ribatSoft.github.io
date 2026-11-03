@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
                                     <span class="text-xs text-slate-500 block uppercase font-bold" data-i18n="dev_card_email_label">Official Support Email</span>
-                                    <span class="text-ribat-500 font-mono">contact@ribatsoft.com</span>
+                                    <span class="text-ribat-500 font-mono">ribatsoft@gmail.com</span>
                                 </div>
                             </div>
                         </div>
@@ -523,7 +523,7 @@
                 <button onclick="openModal('privacy-modal')" class="hover:text-ribat-500" data-i18n="footer_privacy">Privacy Policy</button>
                 <button onclick="openModal('terms-modal')" class="hover:text-ribat-500" data-i18n="footer_terms">Terms of Service</button>
                 <a href="#app-ads" class="hover:text-ribat-500">app-ads.txt</a>
-                <a href="mailto:contact@ribatsoft.com" class="hover:text-ribat-500">contact@ribatsoft.com</a>
+                <a href="mailto:ribatsoft@gmail.com" class="hover:text-ribat-500">ribatsoft@gmail.com</a>
             </div>
         </div>
     </footer>
@@ -733,7 +733,7 @@
                     <h4 class="font-bold text-white mt-4 text-base">2. Google Play & Advertising (AdMob)</h4>
                     <p>Our applications may display third-party advertisements served by Google AdMob. Google uses cookies and device identifiers to serve personalized or non-personalized ads according to user consent choices.</p>
                     <h4 class="font-bold text-white mt-4 text-base">3. Data Deletion Requests</h4>
-                    <p>Users can request complete deletion of their account data or cached app information by emailing <strong>contact@ribatsoft.com</strong>.</p>
+                    <p>Users can request complete deletion of their account data or cached app information by emailing <strong>ribatsoft@gmail.com</strong>.</p>
                 `,
                 terms: `
                     <p><strong>Terms of Service - Ribatsoft</strong></p>
@@ -753,7 +753,7 @@
                     <h4 class="font-bold text-white mt-4 text-base">2. Google Play et AdMob</h4>
                     <p>Nos applications peuvent diffuser des annonces Google AdMob. Google utilise des identifiants anonymes pour personnaliser la publicité selon votre consentement.</p>
                     <h4 class="font-bold text-white mt-4 text-base">3. Demande de Suppression</h4>
-                    <p>Toute demande de suppression de données peut être adressée directement à <strong>contact@ribatsoft.com</strong>.</p>
+                    <p>Toute demande de suppression de données peut être adressée directement à <strong>ribatsoft@gmail.com</strong>.</p>
                 `,
                 terms: `
                     <p><strong>Conditions d'Utilisation - Ribatsoft</strong></p>
@@ -834,8 +834,8 @@
             e.preventDefault();
             const feedback = document.getElementById('form-feedback');
             feedback.textContent = currentLang === 'en' 
-                ? 'Thank you! Your message has been sent successfully to contact@ribatsoft.com.'
-                : 'Merci ! Votre message a été envoyé avec succès à contact@ribatsoft.com.';
+                ? 'Thank you! Your message has been sent successfully to ribatsoft@gmail.com.'
+                : 'Merci ! Votre message a été envoyé avec succès à ribatsoft@gmail.com.';
             feedback.classList.remove('hidden');
             e.target.reset();
             setTimeout(() => feedback.classList.add('hidden'), 4000);
