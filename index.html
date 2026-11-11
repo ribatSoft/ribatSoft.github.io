@@ -1,849 +1,777 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ribatsoft - Mobile App Development & Tech Solutions</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        ribat: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#06b6d4',
-                            600: '#0284c7',
-                            800: '#1e3a8a',
-                            900: '#0f172a',
-                            950: '#0b0f19'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Ribatsoft | Indie Developer Portal</title>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-card: #131b2e;
+            --bg-card-hover: #1c2742;
+            --accent-blue: #00d2ff;
+            --accent-cyan: #3a7bd5;
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+            --border-color: #2a3b5c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
         }
-        .bg-grid-pattern {
-            background-image: radial-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 1px);
-            background-size: 24px 24px;
+
+        /* RTL Support */
+        [dir="rtl"] {
+            font-family: 'Cairo', 'Inter', sans-serif;
         }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+        /* Navbar */
+        header {
+            background-color: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
         }
-        .glow-effect {
-            box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.35);
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .hero-banner-bg {
-            background: linear-gradient(180deg, rgba(11, 15, 25, 0.7) 0%, rgba(11, 15, 25, 0.95) 100%), 
-                        url('banner2.jpg');
-            background-size: cover;
-            background-position: center;
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .brand-text span:first-child {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: block;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text span:last-child {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 6px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-blue);
+            color: #000;
+        }
+
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(19, 27, 46, 0.6) 0%, var(--bg-dark) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-banner-img {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .indie-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        /* Highlights / Stats */
+        .grid-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        .stat-card {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-card i {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .stat-card h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .stat-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        /* About Section */
+        .about-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-card p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* App Showcase */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .app-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 1rem;
+        }
+
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .app-category {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+        }
+
+        .app-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-playstore {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #000;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            transition: background 0.3s;
+        }
+
+        .btn-playstore:hover {
+            background-color: #1a1a1a;
+        }
+
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* app-ads.txt Section */
+        .ads-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .ads-code {
+            background-color: #070a12;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #00ffca;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #1a2638;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        [dir="rtl"] .close-btn {
+            right: auto;
+            left: 20px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
-<body class="bg-ribat-950 text-slate-100 min-h-screen flex flex-col selection:bg-ribat-500 selection:text-white">
+<body>
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo with Official Ribatsoft Developer Icon -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-ribat-800 via-ribat-600 to-ribat-500 p-0.5 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
-                    <img src="iconDev.jpg" 
-                         alt="Ribatsoft Developer Icon" 
-                         class="w-full h-full object-cover rounded-[10px]"
-                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/0f172a/06b6d4?text=Ribatsoft';">
-                </div>
-                <div>
-                    <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-ribat-500 bg-clip-text text-transparent">ribatsoft</span>
-                    <span class="block text-[10px] text-ribat-500 font-bold tracking-widest uppercase -mt-0.5" data-i18n="tagline">Software | Development | Excellence</span>
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <img src="iconDev.jpg" alt="Ribatsoft Icon">
+                <div class="brand-text">
+                    <span>ribatsoft</span>
+                    <span>Software | Development | Excellence</span>
                 </div>
             </a>
-
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="#about" class="hover:text-ribat-500 transition-colors" data-i18n="nav_about">About</a>
-                <a href="#apps" class="hover:text-ribat-500 transition-colors" data-i18n="nav_apps">Our Apps</a>
-                <a href="#app-ads" class="hover:text-ribat-500 transition-colors" data-i18n="nav_appads">AdMob & app-ads.txt</a>
-                <a href="#compliance" class="hover:text-ribat-500 transition-colors" data-i18n="nav_compliance">Compliance</a>
-                <a href="#contact" class="hover:text-ribat-500 transition-colors" data-i18n="nav_contact">Contact</a>
-            </nav>
-
-            <!-- Language Switcher & Action Button -->
-            <div class="hidden md:flex items-center gap-4">
-                <div class="flex items-center bg-slate-900 border border-slate-700/70 rounded-lg p-1 text-xs font-semibold">
-                    <button id="lang-en-btn" onclick="switchLanguage('en')" class="px-2.5 py-1 rounded-md transition-all bg-ribat-500 text-slate-950 font-bold">EN</button>
-                    <button id="lang-fr-btn" onclick="switchLanguage('fr')" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all">FR</button>
+            <nav>
+                <a href="#about" data-i18n="nav-about">About</a>
+                <a href="#apps" data-i18n="nav-apps">Applications</a>
+                <a href="#app-ads" data-i18n="nav-ads">app-ads.txt</a>
+                <a href="#contact" data-i18n="nav-contact">Contact</a>
+                
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+                    <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
                 </div>
-
-                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-ribat-600 to-ribat-500 text-white font-semibold text-sm shadow-md hover:opacity-90 transition-all" data-i18n="btn_support">
-                    Developer Support
-                </a>
-            </div>
-
-            <!-- Mobile Menu & Lang Toggle -->
-            <div class="flex items-center gap-2 md:hidden">
-                <button onclick="toggleLanguage()" class="px-2.5 py-1 rounded-md bg-slate-800 text-xs text-ribat-500 font-bold border border-slate-700">
-                    <span id="mobile-lang-label">FR</span>
-                </button>
-                <button id="mobile-menu-btn" class="text-slate-300 hover:text-white p-2">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
-            <a href="#about" class="block py-2 text-slate-300 hover:text-ribat-500" data-i18n="nav_about">About</a>
-            <a href="#apps" class="block py-2 text-slate-300 hover:text-ribat-500" data-i18n="nav_apps">Our Apps</a>
-            <a href="#app-ads" class="block py-2 text-slate-300 hover:text-ribat-500" data-i18n="nav_appads">AdMob & app-ads.txt</a>
-            <a href="#compliance" class="block py-2 text-slate-300 hover:text-ribat-500" data-i18n="nav_compliance">Compliance</a>
-            <a href="#contact" class="block py-2 text-slate-300 hover:text-ribat-500" data-i18n="nav_contact">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <main class="flex-grow">
-        <!-- Hero Section with Custom Ribatsoft Banner Background -->
-        <section class="relative py-24 lg:py-32 overflow-hidden hero-banner-bg border-b border-slate-800/80">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-ribat-600/20 blur-[140px] rounded-full -z-10"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="indie-badge">
+            <i class="fa-solid fa-code"></i> <span data-i18n="hero-badge">Independent Developer Project</span>
+        </div>
+        
+        <img src="banner2.jpg" alt="Ribatsoft Header Banner" class="hero-banner-img">
+
+        <h1 data-i18n="hero-title">Crafting Simple & Practical <span>Mobile Apps</span></h1>
+        <p data-i18n="hero-desc">
+            Ribatsoft is an independent initiative focused on developing lightweight tools, daily utilities, and practical digital solutions.
+        </p>
+
+        <!-- Highlights Grid -->
+        <div class="grid-stats">
+            <div class="stat-card">
+                <i class="fa-solid fa-user-ninja"></i>
+                <h4 data-i18n="stat-1-title">Indie Project</h4>
+                <p data-i18n="stat-1-desc">Built with passion & care</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4 data-i18n="stat-2-title">Privacy First</h4>
+                <p data-i18n="stat-2-desc">No unnecessary data access</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-check-circle"></i>
+                <h4 data-i18n="stat-3-title">AdMob Verified</h4>
+                <p data-i18n="stat-3-desc">Official app-ads.txt setup</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <h4 data-i18n="stat-4-title">Direct Support</h4>
+                <p data-i18n="stat-4-desc">Quick responses via email</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title" data-i18n="about-title">About Ribatsoft</h2>
+            <p class="section-subtitle" data-i18n="about-subtitle">Transparency and personal commitment to software quality.</p>
             
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <!-- Developer Icon Showcase Badge -->
-                <div class="flex justify-center mb-6">
-                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-ribat-800 via-ribat-600 to-ribat-500 p-1 shadow-2xl glow-effect">
-                        <img src="Gemini_Generated_Image_v9c1nsv9c1nsv9c1.jpg" 
-                             alt="Ribatsoft Developer Icon" 
-                             class="w-full h-full object-cover rounded-xl"
-                             onerror="this.onerror=null; this.src='https://placehold.co/120x120/0f172a/06b6d4?text=Ribatsoft';">
-                    </div>
-                </div>
-
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-ribat-500/40 text-ribat-500 text-xs font-semibold uppercase tracking-wider mb-6">
-                    <span class="w-2 h-2 rounded-full bg-ribat-500 animate-ping"></span>
-                    <span data-i18n="hero_badge">Official Google Play Developer Profile</span>
-                </div>
-                
-                <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight max-w-4xl mx-auto leading-tight" data-i18n="hero_title">
-                    Crafting Innovative & Secure <span class="bg-gradient-to-r from-ribat-500 to-cyan-400 bg-clip-text text-transparent">Mobile Applications</span>
-                </h1>
-                
-                <p class="mt-4 text-base sm:text-lg text-ribat-500 font-bold tracking-widest uppercase" data-i18n="tagline">
-                    Software | Development | Excellence
+            <div class="about-card">
+                <p data-i18n="about-p1">
+                    <strong>Ribatsoft</strong> is an independent developer portfolio dedicated to creating functional Android applications designed for everyday utility, learning, and productivity.
                 </p>
-
-                <p class="mt-4 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_subtitle">
-                    Ribatsoft engineers high-impact digital solutions for educational tracking, Quranic memorization, and smart daily tools.
+                <p data-i18n="about-p2">
+                    Ribatsoft focuses on individual, craft-like app development—prioritizing fast performance, clean design, and strict respect for user privacy and Google Play Console guidelines.
                 </p>
-
-                <div class="mt-10 flex flex-wrap justify-center gap-4">
-                    <a href="#apps" class="px-8 py-4 rounded-xl bg-ribat-500 hover:bg-ribat-600 text-slate-950 font-bold text-base transition-all shadow-lg shadow-ribat-500/25 flex items-center gap-3">
-                        <i class="fa-brands fa-google-play text-xl"></i> <span data-i18n="hero_btn_apps">Explore Our Apps</span>
-                    </a>
-                    <a href="#app-ads" class="px-8 py-4 rounded-xl glass-card hover:bg-slate-800/80 text-white font-semibold text-base transition-all border border-slate-700 flex items-center gap-3">
-                        <i class="fa-solid fa-code text-ribat-500"></i> <span data-i18n="hero_btn_appads">app-ads.txt File</span>
-                    </a>
-                </div>
-
-                <!-- Stats / Badges -->
-                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                    <div class="p-4 rounded-2xl glass-card border border-slate-800">
-                        <p class="text-2xl font-bold text-white">100%</p>
-                        <p class="text-xs text-slate-400 mt-1" data-i18n="stat_1">Google Play Compliant</p>
-                    </div>
-                    <div class="p-4 rounded-2xl glass-card border border-slate-800">
-                        <p class="text-2xl font-bold text-ribat-500">AdMob</p>
-                        <p class="text-xs text-slate-400 mt-1" data-i18n="stat_2">Verified Publisher</p>
-                    </div>
-                    <div class="p-4 rounded-2xl glass-card border border-slate-800">
-                        <p class="text-2xl font-bold text-white">24/7</p>
-                        <p class="text-xs text-slate-400 mt-1" data-i18n="stat_3">Service Availability</p>
-                    </div>
-                    <div class="p-4 rounded-2xl glass-card border border-slate-800">
-                        <p class="text-2xl font-bold text-cyan-400">Secure</p>
-                        <p class="text-xs text-slate-400 mt-1" data-i18n="stat_4">Data Protection</p>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Banner Visual Display Card Section -->
-        <section class="py-12 bg-slate-950/80 border-b border-slate-800/60">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass-card rounded-3xl overflow-hidden border border-ribat-500/30 p-2 shadow-2xl">
-                    <div class="relative w-full rounded-2xl overflow-hidden">
-                        <img src="banner2.jpg" 
-                             alt="Ribatsoft Developer Header Banner" 
-                             class="w-full h-auto object-cover max-h-[350px]"
-                             onerror="this.onerror=null; this.src='banner2.jpg';">
-                        <div class="absolute bottom-4 right-4 bg-slate-950/90 backdrop-blur-md px-4 py-2 rounded-xl border border-ribat-500/40 text-xs text-ribat-500 font-bold uppercase tracking-wider">
-                            Official Play Store Developer Header
+        <!-- Apps Section -->
+        <section id="apps">
+            <h2 class="section-title" data-i18n="apps-title">Published & Upcoming Applications</h2>
+            <p class="section-subtitle" data-i18n="apps-subtitle">Explore official apps maintained on the Google Play Store.</p>
+
+            <div class="app-grid">
+                
+                <!-- App 1: Quran Revision -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <img src="https://play-lh.googleusercontent.com/JZDASzM-t0FS-yXHOek_rbP_HdasTRnIfh5DiKkpo1V0VYztHwpED23yBjZ9D7j8bXKfWDkyXwy7LJcoiyLfVQ=w240-h480-rw" alt="Quran Revision App" class="app-icon">
+                        <div>
+                            <div class="app-title" data-i18n="app1-title">Ribatsoft Quran Revision</div>
+                            <div class="app-category" data-i18n="app1-cat">Education / Utility</div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Developer Section -->
-        <section id="about" class="py-16 bg-slate-900/50 border-b border-slate-800/60">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <div class="inline-flex items-center gap-2 text-ribat-500 font-semibold text-sm mb-2">
-                            <i class="fa-solid fa-shield-halved"></i> <span data-i18n="about_tag">About Ribatsoft</span>
-                        </div>
-                        <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl" data-i18n="about_title">
-                            Commitment to Excellence and Engineering Reliability
-                        </h2>
-                        <p class="mt-4 text-slate-300 leading-relaxed" data-i18n="about_p1">
-                            Founded with a vision rooted in technical precision and modern usability, <strong>Ribatsoft</strong> designs mobile software architectures built to meet the rigorous demands of global users and store compliance.
-                        </p>
-                        <p class="mt-3 text-slate-400 leading-relaxed" data-i18n="about_p2">
-                            We specialize in digitalizing educational workflows, tuition tracking, and personal learning tools—placing data privacy and intuitive UI at the center of every app.
-                        </p>
-
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center gap-3 text-slate-300 text-sm">
-                                <i class="fa-solid fa-circle-check text-ribat-500"></i> <span data-i18n="about_bullet1">Secure data processing and robust mobile design</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-slate-300 text-sm">
-                                <i class="fa-solid fa-circle-check text-ribat-500"></i> <span data-i18n="about_bullet2">Intuitive dashboards for students, parents, and users</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-slate-300 text-sm">
-                                <i class="fa-solid fa-circle-check text-ribat-500"></i> <span data-i18n="about_bullet3">Strict adherence to GDPR and Google Play Console policies</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <div class="glass-card rounded-3xl p-8 border border-slate-800 relative z-10">
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-ribat-500/40 p-1 flex-shrink-0">
-                                    <img src="Gemini_Generated_Image_v9c1nsv9c1nsv9c1.jpg" 
-                                         alt="Ribatsoft Icon" 
-                                         class="w-full h-full object-cover rounded-xl"
-                                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/0f172a/06b6d4?text=Ribatsoft';">
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold text-white" data-i18n="dev_card_title">Developer Profile</h3>
-                                    <p class="text-xs text-slate-400">Google Play Console & AdMob ID</p>
-                                </div>
-                            </div>
-                            <div class="space-y-4 text-sm">
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                    <span class="text-xs text-slate-500 block uppercase font-bold" data-i18n="dev_card_name_label">Developer Name</span>
-                                    <span class="text-slate-200 font-semibold text-base">Ribatsoft</span>
-                                </div>
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                    <span class="text-xs text-slate-500 block uppercase font-bold" data-i18n="dev_card_spec_label">Specialization</span>
-                                    <span class="text-slate-200 font-semibold" data-i18n="dev_card_spec_val">Educational Tools & Quranic Revision Systems</span>
-                                </div>
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                    <span class="text-xs text-slate-500 block uppercase font-bold" data-i18n="dev_card_email_label">Official Support Email</span>
-                                    <span class="text-ribat-500 font-mono">ribatsoft@gmail.com</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Apps Showcase Section -->
-        <section id="apps" class="py-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-i18n="apps_title">Featured Applications</h2>
-                    <p class="mt-4 text-slate-400" data-i18n="apps_subtitle">Explore our official applications published and maintained on the Google Play Store.</p>
-                </div>
-
-                <div class="max-w-4xl mx-auto space-y-8">
-                    
-                    <!-- App #1: Ribatsoft Quran Revision (USES OFFICIAL PLAY STORE ICON URL) -->
-                    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-ribat-500/40 hover:border-ribat-500 transition-all glow-effect relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 bg-gradient-to-l from-ribat-500 to-cyan-400 text-slate-950 font-bold text-xs uppercase px-6 py-2 rounded-bl-2xl" data-i18n="app1_badge">
-                            Flagship Application
-                        </div>
-
-                        <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                            <!-- Official Play Store App Icon -->
-                            <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-gradient-to-br from-ribat-800 to-ribat-600 p-1 flex-shrink-0 shadow-2xl border border-ribat-500/40 overflow-hidden">
-                                <img src="https://play-lh.googleusercontent.com/JZDASzM-t0FS-yXHOek_rbP_HdasTRnIfh5DiKkpo1V0VYztHwpED23yBjZ9D7j8bXKfWDkyXwy7LJcoiyLfVQ=w240-h480-rw" 
-                                     alt="Ribatsoft Quran Revision Icon" 
-                                     class="w-full h-full object-cover rounded-xl"
-                                     onerror="this.onerror=null; this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Quran+Revision';">
-                            </div>
-
-                            <!-- App Info -->
-                            <div class="flex-grow space-y-4">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white group-hover:text-ribat-500 transition-colors">
-                                        Ribatsoft Quran Revision
-                                    </h3>
-                                    <p class="text-xs text-ribat-500 font-medium mt-1">
-                                        <i class="fa-solid fa-star"></i> <span data-i18n="app1_subtitle">Holy Quran Memorization & Revision Tracking</span>
-                                    </p>
-                                </div>
-
-                                <p class="text-slate-300 text-sm leading-relaxed" data-i18n="app1_desc">
-                                    A specialized application designed to assist learners and memorizers with structured daily revision, progress tracking, and scheduled review cycles for the Holy Quran.
-                                </p>
-
-                                <!-- Features Grid -->
-                                <div class="grid grid-cols-2 gap-2 pt-2 text-xs text-slate-400">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app1_f1">Custom Revision Schedules</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app1_f2">Memorization Statistics</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app1_f3">Clean & Intuitive Interface</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app1_f4">Smart Daily Reminders</span>
-                                    </div>
-                                </div>
-
-                                <div class="pt-4 flex flex-wrap items-center gap-4">
-                                    <a href="https://play.google.com/store/apps/details?id=com.ribatsoft.quranrevision" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-white text-slate-950 font-bold text-sm inline-flex items-center gap-3 transition-all shadow-md">
-                                        <i class="fa-brands fa-google-play text-xl text-green-600"></i>
-                                        <div>
-                                            <span class="block text-[10px] leading-none text-slate-600 uppercase font-bold" data-i18n="get_on">GET IT ON</span>
-                                            <span class="text-sm font-extrabold">Google Play</span>
-                                        </div>
-                                    </a>
-
-                                    <button onclick="openModal('privacy-modal')" class="px-4 py-3 rounded-xl glass-card hover:bg-slate-800 text-xs font-semibold text-slate-300 transition-all border border-slate-700">
-                                        <i class="fa-solid fa-shield-cat text-ribat-500 mr-1"></i> <span data-i18n="privacy_policy_btn">Privacy Policy</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- App #2: School & Tuition Fee Tracker -->
-                    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-slate-700 transition-all relative overflow-hidden group">
-                        <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                            <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-gradient-to-br from-ribat-900 via-ribat-800 to-ribat-600 p-1 flex-shrink-0 shadow-2xl border border-ribat-500/30">
-                                <div class="w-full h-full bg-slate-950 rounded-xl flex flex-col items-center justify-center text-center p-3">
-                                    <i class="fa-solid fa-graduation-cap text-4xl text-ribat-500 mb-2"></i>
-                                    <span class="text-[10px] font-bold text-white uppercase tracking-wider" data-i18n="app2_icon_label">School & Tuition</span>
-                                </div>
-                            </div>
-
-                            <div class="flex-grow space-y-4">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white group-hover:text-ribat-500 transition-colors" data-i18n="app2_title">
-                                        School & Tuition Fee Tracker
-                                    </h3>
-                                    <p class="text-xs text-ribat-500 font-medium mt-1">
-                                        <i class="fa-solid fa-building-columns"></i> <span data-i18n="app2_subtitle">Educational & Financial Management</span>
-                                    </p>
-                                </div>
-
-                                <p class="text-slate-300 text-sm leading-relaxed" data-i18n="app2_desc">
-                                    A mobile solution for parents and educational institutions. Features real-time grade tracking, attendance monitoring, and a secure module for handling tuition fee payments.
-                                </p>
-
-                                <div class="grid grid-cols-2 gap-2 pt-2 text-xs text-slate-400">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app2_f1">Payment History</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app2_f2">Instant Push Alerts</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app2_f3">Digital PDF Receipts</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-ribat-500"></i> <span data-i18n="app2_f4">Parent Portal</span>
-                                    </div>
-                                </div>
-
-                                <div class="pt-4 flex flex-wrap items-center gap-4">
-                                    <button disabled class="px-6 py-3 rounded-xl bg-slate-800 text-slate-400 font-bold text-sm inline-flex items-center gap-3 border border-slate-700 cursor-not-allowed">
-                                        <i class="fa-brands fa-google-play text-xl text-slate-500"></i>
-                                        <div>
-                                            <span class="block text-[10px] leading-none text-slate-500 uppercase font-bold" data-i18n="coming_soon">COMING SOON ON</span>
-                                            <span class="text-sm font-extrabold text-slate-300">Google Play</span>
-                                        </div>
-                                    </button>
-
-                                    <button onclick="openModal('privacy-modal')" class="px-4 py-3 rounded-xl glass-card hover:bg-slate-800 text-xs font-semibold text-slate-300 transition-all border border-slate-700">
-                                        <i class="fa-solid fa-shield-cat text-ribat-500 mr-1"></i> <span data-i18n="privacy_policy_btn">Privacy Policy</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- App-Ads.txt Required AdMob Section -->
-        <section id="app-ads" class="py-16 bg-slate-900/60 border-t border-slate-800">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <div class="inline-flex items-center gap-2 text-ribat-500 font-semibold text-xs uppercase tracking-wider mb-2">
-                        <i class="fa-solid fa-rectangle-ad"></i> AdMob & Google Play Verification
-                    </div>
-                    <h2 class="text-3xl font-extrabold text-white" data-i18n="appads_title">Official app-ads.txt File</h2>
-                    <p class="mt-2 text-slate-400 text-sm max-w-2xl mx-auto" data-i18n="appads_subtitle">
-                        This file is publicly hosted at the root domain to verify Ribatsoft developer ownership for Google AdMob and ad exchanges.
+                    <p class="app-desc" data-i18n="app1-desc">
+                        A specialized tool designed to assist users with structured daily revision, memorization tracking, and scheduled review cycles for the Holy Quran.
                     </p>
+                    <a href="https://play.google.com/store/apps/details?id=com.ribatsoft.quranrevision" target="_blank" class="btn-playstore">
+                        <i class="fa-brands fa-google-play"></i> <span data-i18n="btn-playstore">Get it on Google Play</span>
+                    </a>
                 </div>
 
-                <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-                            <span class="text-xs text-slate-400 font-mono ml-2">https://ribatsoft.github.io/app-ads.txt</span>
+                <!-- App 2: School Tracker -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <img src="iconDev.jpg" alt="School Fee Tracker App" class="app-icon">
+                        <div>
+                            <div class="app-title" data-i18n="app2-title">School & Tuition Fee Tracker</div>
+                            <div class="app-category" data-i18n="app2-cat">Productivity / Management</div>
                         </div>
-                        <button onclick="copyAdsTxt()" class="px-3 py-1.5 rounded-lg bg-ribat-500/20 hover:bg-ribat-500/30 text-ribat-500 text-xs font-semibold transition-all border border-ribat-500/40 flex items-center gap-1.5">
-                            <i class="fa-solid fa-copy"></i> <span id="copy-btn-text" data-i18n="copy_code">Copy Snippet</span>
-                        </button>
                     </div>
-
-                    <textarea id="app-ads-content" readonly class="w-full bg-slate-950 font-mono text-xs sm:text-sm text-cyan-300 p-4 rounded-xl border border-slate-800 focus:outline-none h-28 resize-none">google.com, pub-2206005466890501, DIRECT, f08c47fec0942fa0</textarea>
-                    
-                    
+                    <p class="app-desc" data-i18n="app2-desc">
+                        An intuitive helper app for parents and tutors to organize their child studies, keep payment logs, and track progress easily.
+                    </p>
+                    <span class="btn-playstore btn-disabled">
+                        <i class="fa-solid fa-clock"></i> <span data-i18n="btn-soon">In Development / Coming Soon</span>
+                    </span>
                 </div>
+
             </div>
         </section>
 
-        <!-- Compliance & Developer Policies -->
-        <section id="compliance" class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                        <div class="w-10 h-10 rounded-xl bg-ribat-500/10 text-ribat-500 flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-user-shield"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="comp1_title">Data Privacy</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4" data-i18n="comp1_desc">
-                            We implement strict encryption and data protection standard guidelines required by Google Play Console Policies.
-                        </p>
-                        <button onclick="openModal('privacy-modal')" class="text-xs font-bold text-ribat-500 hover:underline flex items-center gap-1">
-                            <span data-i18n="read_policy">Read Privacy Policy</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
-                    </div>
+        <!-- AdMob / app-ads.txt Section -->
+        <section id="app-ads">
+            <h2 class="section-title" data-i18n="ads-title">AdMob & Verification</h2>
+            <p class="section-subtitle" data-i18n="ads-subtitle">Official app-ads.txt file hosted for developer identification.</p>
 
-                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                        <div class="w-10 h-10 rounded-xl bg-ribat-500/10 text-ribat-500 flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-file-contract"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="comp2_title">Terms of Service</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4" data-i18n="comp2_desc">
-                            Clear user agreements ensuring fair usage, rights, and responsibilities for all Ribatsoft applications.
-                        </p>
-                        <button onclick="openModal('terms-modal')" class="text-xs font-bold text-ribat-500 hover:underline flex items-center gap-1">
-                            <span data-i18n="read_terms">Read Terms</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
-                    </div>
-
-                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                        <div class="w-10 h-10 rounded-xl bg-ribat-500/10 text-ribat-500 flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-headset"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="comp3_title">Developer Support</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4" data-i18n="comp3_desc">
-                            Dedicated assistance for account issues, bug reports, and data deletion requests.
-                        </p>
-                        <a href="#contact" class="text-xs font-bold text-ribat-500 hover:underline flex items-center gap-1">
-                            <span data-i18n="contact_support">Contact Support</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </a>
-                    </div>
+            <div class="ads-box">
+                <p data-i18n="ads-desc">This public endpoint verifies Ribatsoft developer ownership for Google AdMob and ad networks:</p>
+                <div class="ads-code">
+                    google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
                 </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                    <span data-i18n="ads-link">Direct access:</span> <a href="/app-ads.txt" style="color: var(--accent-blue);">https://ribatsoft.github.io/app-ads.txt</a>
+                </p>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-slate-900/40 border-t border-slate-800">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-extrabold text-white" data-i18n="contact_title">Get in Touch with Ribatsoft</h2>
-                <p class="mt-3 text-slate-400 text-sm" data-i18n="contact_subtitle">Have questions regarding our mobile apps or developer policies?</p>
+        <section id="contact">
+            <h2 class="section-title" data-i18n="contact-title">Developer Support & Legal</h2>
+            <p class="section-subtitle" data-i18n="contact-subtitle">Have questions, feedback, or data deletion requests?</p>
 
-                <div class="mt-10 glass-card rounded-3xl p-8 border border-slate-800 max-w-xl mx-auto text-left">
-                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="form_name">Name</label>
-                            <input type="text" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-ribat-500" placeholder="Your name">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="form_email">Email</label>
-                            <input type="email" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-ribat-500" placeholder="your.email@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="form_msg">Message</label>
-                            <textarea rows="4" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-ribat-500 resize-none" placeholder="Describe your inquiry..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-ribat-500 hover:bg-ribat-600 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-ribat-500/20" data-i18n="form_submit">
-                            Send Message
-                        </button>
-                    </form>
-                    <div id="form-feedback" class="hidden mt-4 p-3 rounded-xl bg-green-500/20 text-green-400 text-xs text-center border border-green-500/30 font-medium"></div>
-                </div>
+            <div class="about-card">
+                <p><i class="fa-solid fa-envelope" style="color: var(--accent-blue);"></i> <strong data-i18n="contact-email">Direct Support Email:</strong> <a href="mailto:ribatsoft@gmail.com" style="color: var(--text-main);">ribatsoft@gmail.com</a></p>
+                <p style="margin-top: 1rem;">
+                    <a href="#" onclick="openModal('privacyModal'); return false;" style="color: var(--accent-blue); margin-right: 15px;" data-i18n="link-privacy">Privacy Policy</a>
+                    <a href="#" onclick="openModal('termsModal'); return false;" style="color: var(--accent-blue);" data-i18n="link-terms">Terms of Service</a>
+                </p>
             </div>
         </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/80 bg-slate-950 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-ribat-800 flex items-center justify-center overflow-hidden">
-                    <img src="iconDev.jpg" alt="Ribatsoft Icon" class="w-full h-full object-cover">
-                </div>
-                <span class="text-sm font-bold text-slate-200">Ribatsoft</span>
-                <span class="text-xs text-slate-500">© 2026 Ribatsoft. All rights reserved.</span>
-            </div>
-
-            <div class="flex items-center gap-6 text-xs text-slate-400">
-                <button onclick="openModal('privacy-modal')" class="hover:text-ribat-500" data-i18n="footer_privacy">Privacy Policy</button>
-                <button onclick="openModal('terms-modal')" class="hover:text-ribat-500" data-i18n="footer_terms">Terms of Service</button>
-                <a href="#app-ads" class="hover:text-ribat-500">app-ads.txt</a>
-                <a href="mailto:ribatsoft@gmail.com" class="hover:text-ribat-500">ribatsoft@gmail.com</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <!-- Privacy Policy Modal -->
-    <div id="privacy-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-slate-800 max-h-[85vh] overflow-y-auto">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-ribat-500"></i> <span data-i18n="privacy_modal_title">Privacy Policy</span>
-                </h3>
-                <button onclick="closeModal('privacy-modal')" class="text-slate-400 hover:text-white p-2">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-            <div class="mt-4 space-y-4 text-sm text-slate-300 leading-relaxed" id="privacy-modal-body">
-                <!-- Content set dynamically by JS based on language -->
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-800 text-right">
-                <button onclick="closeModal('privacy-modal')" class="px-5 py-2 rounded-xl bg-ribat-500 text-slate-950 font-bold text-xs" data-i18n="close">Close</button>
-            </div>
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('privacyModal')">&times;</span>
+            <h2 data-i18n="modal-privacy-title">Privacy Policy</h2>
+            <br>
+            <p data-i18n="modal-privacy-p1">At Ribatsoft, accessible from https://ribatsoft.github.io, one of our main priorities is the privacy of our visitors and app users.</p>
+            <br>
+            <p data-i18n="modal-privacy-p2">Ribatsoft applications are designed to minimize data collection. Personal user data is not sold or shared with unauthorized third parties. Any analytical or advertising data processed is handled strictly through standard Google Play Services and AdMob protocols.</p>
+            <br>
+            <p data-i18n="modal-privacy-p3">For questions or data removal requests, please contact us at <strong>ribatsoft@gmail.com</strong>.</p>
         </div>
     </div>
 
     <!-- Terms Modal -->
-    <div id="terms-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-slate-800 max-h-[85vh] overflow-y-auto">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-file-contract text-ribat-500"></i> <span data-i18n="terms_modal_title">Terms of Service</span>
-                </h3>
-                <button onclick="closeModal('terms-modal')" class="text-slate-400 hover:text-white p-2">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-            <div class="mt-4 space-y-4 text-sm text-slate-300 leading-relaxed" id="terms-modal-body">
-                <!-- Content set dynamically by JS based on language -->
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-800 text-right">
-                <button onclick="closeModal('terms-modal')" class="px-5 py-2 rounded-xl bg-ribat-500 text-slate-950 font-bold text-xs" data-i18n="close">Close</button>
-            </div>
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('termsModal')">&times;</span>
+            <h2 data-i18n="modal-terms-title">Terms of Service</h2>
+            <br>
+            <p data-i18n="modal-terms-p1">By downloading or using Ribatsoft applications, these terms will automatically apply to you. You should make sure that you read them carefully before using our apps.</p>
+            <br>
+            <p data-i18n="modal-terms-p2">All applications are provided "as is" without warranties of any kind. Ribatsoft is not liable for any indirect damages resulting from application usage.</p>
         </div>
     </div>
 
-    <!-- JavaScript Translations & Interactions -->
+    <!-- Footer -->
+    <footer>
+        <p data-i18n="footer-text">&copy; 2026 Ribatsoft. Independent Developer Project. All rights reserved.</p>
+    </footer>
+
+    <!-- Translation Dictionary Script -->
     <script>
-        let currentLang = 'en';
-
-        const i18n = {
+        const translations = {
             en: {
-                tagline: "Software | Development | Excellence",
-                nav_about: "About",
-                nav_apps: "Our Apps",
-                nav_appads: "AdMob & app-ads.txt",
-                nav_compliance: "Compliance",
-                nav_contact: "Contact",
-                btn_support: "Developer Support",
-                hero_badge: "Official Google Play Developer Profile",
-                hero_title: 'Crafting Innovative & Secure <span class="bg-gradient-to-r from-ribat-500 to-cyan-400 bg-clip-text text-transparent">Mobile Applications</span>',
-                hero_subtitle: "Ribatsoft engineers high-impact digital solutions for educational tracking, Quranic memorization, and smart daily tools.",
-                hero_btn_apps: "Explore Our Apps",
-                hero_btn_appads: "app-ads.txt File",
-                stat_1: "Google Play Compliant",
-                stat_2: "Verified Publisher",
-                stat_3: "Service Availability",
-                stat_4: "Data Protection",
-                about_tag: "About Ribatsoft",
-                about_title: "Commitment to Excellence and Engineering Reliability",
-                about_p1: "Founded with a vision rooted in technical precision and modern usability, <strong>Ribatsoft</strong> designs mobile software architectures built to meet the rigorous demands of global users and store compliance.",
-                about_p2: "We specialize in digitalizing educational workflows, tuition tracking, and personal learning tools—placing data privacy and intuitive UI at the center of every app.",
-                about_bullet1: "Secure data processing and robust mobile design",
-                about_bullet2: "Intuitive dashboards for students, parents, and users",
-                about_bullet3: "Strict adherence to GDPR and Google Play Console policies",
-                dev_card_title: "Developer Profile",
-                dev_card_name_label: "Developer Name",
-                dev_card_spec_label: "Specialization",
-                dev_card_spec_val: "Educational Tools & Quranic Revision Systems",
-                dev_card_email_label: "Official Support Email",
-                apps_title: "Featured Applications",
-                apps_subtitle: "Explore our official applications published and maintained on the Google Play Store.",
-                app1_badge: "Flagship Application",
-                app1_subtitle: "Holy Quran Memorization & Revision Tracking",
-                app1_desc: "A specialized application designed to assist learners and memorizers with structured daily revision, progress tracking, and scheduled review cycles for the Holy Quran.",
-                app1_f1: "Custom Revision Schedules",
-                app1_f2: "Memorization Statistics",
-                app1_f3: "Clean & Intuitive Interface",
-                app1_f4: "Smart Daily Reminders",
-                get_on: "GET IT ON",
-                privacy_policy_btn: "Privacy Policy",
-                app2_icon_label: "School & Tuition",
-                app2_title: "School & Tuition Fee Tracker",
-                app2_subtitle: "Educational & Financial Management",
-                app2_desc: "A mobile solution for parents and educational institutions. Features real-time grade tracking, attendance monitoring, and a secure module for handling tuition fee payments.",
-                app2_f1: "Payment History",
-                app2_f2: "Instant Push Alerts",
-                app2_f3: "Digital PDF Receipts",
-                app2_f4: "Parent Portal",
-                coming_soon: "COMING SOON ON",
-                appads_title: "Official app-ads.txt File",
-                appads_subtitle: "This file is publicly hosted at the root domain to verify Ribatsoft developer ownership for Google AdMob and ad exchanges.",
-                copy_code: "Copy Snippet",
-                appads_note: "* Replace <code>pub-0000000000000000</code> with your actual Google AdMob Publisher ID when deploying to your root server.",
-                comp1_title: "Data Privacy",
-                comp1_desc: "We implement strict encryption and data protection standard guidelines required by Google Play Console Policies.",
-                read_policy: "Read Privacy Policy",
-                comp2_title: "Terms of Service",
-                comp2_desc: "Clear user agreements ensuring fair usage, rights, and responsibilities for all Ribatsoft applications.",
-                read_terms: "Read Terms",
-                comp3_title: "Developer Support",
-                comp3_desc: "Dedicated assistance for account issues, bug reports, and data deletion requests.",
-                contact_support: "Contact Support",
-                contact_title: "Get in Touch with Ribatsoft",
-                contact_subtitle: "Have questions regarding our mobile apps or developer policies?",
-                form_name: "Name",
-                form_email: "Email",
-                form_msg: "Message",
-                form_submit: "Send Message",
-                footer_privacy: "Privacy Policy",
-                footer_terms: "Terms of Service",
-                privacy_modal_title: "Privacy Policy",
-                terms_modal_title: "Terms of Service",
-                close: "Close"
+                "nav-about": "About",
+                "nav-apps": "Applications",
+                "nav-ads": "app-ads.txt",
+                "nav-contact": "Contact",
+                "hero-badge": "Independent Developer Project",
+                "hero-title": "Crafting Simple & Practical Mobile Apps",
+                "hero-desc": "Ribatsoft is an independent software project focused on developing lightweight educational tools, daily revision utilities, and practical digital solutions.",
+                "stat-1-title": "Indie Project",
+                "stat-1-desc": "Built with passion & care",
+                "stat-2-title": "Privacy First",
+                "stat-2-desc": "No unnecessary data access",
+                "stat-3-title": "AdMob Verified",
+                "stat-3-desc": "Official app-ads.txt setup",
+                "stat-4-title": "Direct Support",
+                "stat-4-desc": "Quick responses via email",
+                "about-title": "About Ribatsoft",
+                "about-subtitle": "Transparency and personal commitment to software quality.",
+                "about-p1": "Ribatsoft is an independent developer portfolio dedicated to creating functional Android applications designed for everyday utility, learning, and productivity.",
+                "about-p2": "Rather than operating as a large corporate studio, Ribatsoft focuses on individual, craft-like app development—prioritizing fast performance, clean design, and strict respect for user privacy and Google Play Console guidelines.",
+                "apps-title": "Published & Upcoming Applications",
+                "apps-subtitle": "Explore official apps maintained on the Google Play Store.",
+                "app1-title": "Ribatsoft Quran Revision",
+                "app1-cat": "Education / Utility",
+                "app1-desc": "A specialized tool designed to assist users with structured daily revision, memorization tracking, and scheduled review cycles for the Holy Quran.",
+                "btn-playstore": "Get it on Google Play",
+                "app2-title": "School & Tuition Fee Tracker",
+                "app2-cat": "Productivity / Management",
+                "app2-desc": "An intuitive helper app for parents and tutors to organize student attendance, keep payment logs, and track educational progress easily.",
+                "btn-soon": "In Development / Coming Soon",
+                "ads-title": "AdMob & Verification",
+                "ads-subtitle": "Official app-ads.txt file hosted for developer identification.",
+                "ads-desc": "This public endpoint verifies Ribatsoft developer ownership for Google AdMob and ad networks:",
+                "ads-link": "Direct access:",
+                "contact-title": "Developer Support & Legal",
+                "contact-subtitle": "Have questions, feedback, or data deletion requests?",
+                "contact-email": "Direct Support Email:",
+                "link-privacy": "Privacy Policy",
+                "link-terms": "Terms of Service",
+                "modal-privacy-title": "Privacy Policy",
+                "modal-privacy-p1": "At Ribatsoft, accessible from https://ribatsoft.github.io, one of our main priorities is the privacy of our visitors and app users.",
+                "modal-privacy-p2": "Ribatsoft applications are designed to minimize data collection. Personal user data is not sold or shared with unauthorized third parties. Any analytical or advertising data processed is handled strictly through standard Google Play Services and AdMob protocols.",
+                "modal-privacy-p3": "For questions or data removal requests, please contact us at ribatsoft@gmail.com.",
+                "modal-terms-title": "Terms of Service",
+                "modal-terms-p1": "By downloading or using Ribatsoft applications, these terms will automatically apply to you. You should make sure that you read them carefully before using our apps.",
+                "modal-terms-p2": "All applications are provided 'as is' without warranties of any kind. Ribatsoft is not liable for any indirect damages resulting from application usage.",
+                "footer-text": "© 2026 Ribatsoft. Independent Developer Project. All rights reserved."
             },
             fr: {
-                tagline: "Software | Development | Excellence",
-                nav_about: "À propos",
-                nav_apps: "Nos Applications",
-                nav_appads: "AdMob & app-ads.txt",
-                nav_compliance: "Conformité",
-                nav_contact: "Contact",
-                btn_support: "Support Développeur",
-                hero_badge: "Profil Développeur Officiel Google Play",
-                hero_title: 'Conception d\'Applications Mobiles <span class="bg-gradient-to-r from-ribat-500 to-cyan-400 bg-clip-text text-transparent">Innovantes & Sécurisées</span>',
-                hero_subtitle: "Ribatsoft développe des solutions digitales à fort impact pour la gestion scolaire, le suivi parental et l'apprentissage du Coran.",
-                hero_btn_apps: "Voir nos applications",
-                hero_btn_appads: "Fichier app-ads.txt",
-                stat_1: "Conforme Google Play",
-                stat_2: "Éditeur Vérifié",
-                stat_3: "Disponibilité des Services",
-                stat_4: "Protection des Données",
-                about_tag: "À Propos de Ribatsoft",
-                about_title: "Un engagement d'excellence et de fiabilité",
-                about_p1: "Fondé avec une vision ancrée dans la rigueur et l'innovation, <strong>Ribatsoft</strong> conçoit des architectures logicielles mobiles répondant aux exigences strictes des utilisateurs et des règles Google Play.",
-                about_p2: "Nous nous spécialisons dans la numérisation des processus éducatifs, la révision coranique et le suivi scolaire avec une priorité absolue sur la confidentialité.",
-                about_bullet1: "Traitement sécurisé des données et conception robuste",
-                about_bullet2: "Tableaux de bord intuitifs pour parents et utilisateurs",
-                about_bullet3: "Respect strict du RGPD et des règles Google Play Console",
-                dev_card_title: "Profil Développeur",
-                dev_card_name_label: "Nom Développeur",
-                dev_card_spec_label: "Spécialité",
-                dev_card_spec_val: "Outils Éducatifs & Système de Révision Coranique",
-                dev_card_email_label: "Contact Support Officiel",
-                apps_title: "Nos Applications En Vedette",
-                apps_subtitle: "Découvrez nos applications officielles publiées et maintenues sur le Google Play Store.",
-                app1_badge: "Application Principale",
-                app1_subtitle: "Suivi & Révision du Saint Coran",
-                app1_desc: "Une application conçue spécialement pour aider à la mémorisation et la révision méthodique du Saint Coran avec un programme personnalisé.",
-                app1_f1: "Planification de révision",
-                app1_f2: "Statistiques de mémorisation",
-                app1_f3: "Interface intuitive & épurée",
-                app1_f4: "Rappels & Notifications",
-                get_on: "DISPONIBLE SUR",
-                privacy_policy_btn: "Confidentialité",
-                app2_icon_label: "Suivi & Scolarité",
-                app2_title: "Suivi & Paiement de Scolarité",
-                app2_subtitle: "Solution Éducative & Financière",
-                app2_desc: "L'application pour parents et établissements scolaires. Facilite le suivi des notes, présences et le paiement sécurisé des frais de scolarité.",
-                app2_f1: "Historique des règlements",
-                app2_f2: "Notifications instantanées",
-                app2_f3: "Reçus PDF numériques",
-                app2_f4: "Espace Sécurisé Parent",
-                coming_soon: "À VENIR SUR",
-                appads_title: "Fichier app-ads.txt Officiel",
-                appads_subtitle: "Ce fichier est hébergé publiquement à la racine du domaine pour valider la propriété développeur auprès de Google AdMob.",
-                copy_code: "Copier le texte",
-                appads_note: "* Remplacez <code>pub-0000000000000000</code> par votre identifiant éditeur Google AdMob réel.",
-                comp1_title: "Confidentialité",
-                comp1_desc: "Chiffrement strict des données conformément aux directives de la Google Play Console.",
-                read_policy: "Lire la politique",
-                comp2_title: "Conditions d'Utilisation",
-                comp2_desc: "Accords d'utilisation équitables définissant les droits et devoirs des utilisateurs.",
-                read_terms: "Lire les conditions",
-                comp3_title: "Support Développeur",
-                comp3_desc: "Assistance dédiée pour la suppression de données et les questions techniques.",
-                contact_support: "Contacter le support",
-                contact_title: "Contactez Ribatsoft",
-                contact_subtitle: "Une question concernant nos applications ou notre politique développeur ?",
-                form_name: "Nom",
-                form_email: "E-mail",
-                form_msg: "Message",
-                form_submit: "Envoyer le message",
-                footer_privacy: "Confidentialité",
-                footer_terms: "Conditions d'utilisation",
-                privacy_modal_title: "Politique de Confidentialité",
-                terms_modal_title: "Conditions d'Utilisation",
-                close: "Fermer"
+                "nav-about": "À propos",
+                "nav-apps": "Applications",
+                "nav-ads": "app-ads.txt",
+                "nav-contact": "Contact",
+                "hero-badge": "Projet Développeur Indépendant",
+                "hero-title": "Création d'Applications Mobile Simples et Pratiques",
+                "hero-desc": "Ribatsoft est un projet indépendant axé sur le développement d'outils éducatifs légers et de solutions numériques pratiques pour le quotidien.",
+                "stat-1-title": "Projet Indépendant",
+                "stat-1-desc": "Conçu avec passion et soin",
+                "stat-2-title": "Confidentialité",
+                "stat-2-desc": "Aucun accès inutile aux données",
+                "stat-3-title": "Vérifié AdMob",
+                "stat-3-desc": "Fichier app-ads.txt officiel",
+                "stat-4-title": "Support Direct",
+                "stat-4-desc": "Réponses rapides par e-mail",
+                "about-title": "À propos de Ribatsoft",
+                "about-subtitle": "Transparence et engagement personnel envers la qualité logicielle.",
+                "about-p1": "Ribatsoft est un portfolio de développeur indépendant dédié à la création d'applications Android fonctionnelles conçues pour l'utilité quotidienne, l'apprentissage et la productivité.",
+                "about-p2": "Ribatsoft se concentre sur le développement individuel et artisanal d'applications — en privilégiant la rapidité, un design épuré et le respect strict de la confidentialité et des règles Google Play Console.",
+                "apps-title": "Applications Publiées & À Venir",
+                "apps-subtitle": "Découvrez nos applications officielles sur le Google Play Store.",
+                "app1-title": "Ribatsoft Quran Revision",
+                "app1-cat": "Éducation / Utilitaires",
+                "app1-desc": "Un outil spécialisé conçu pour aider les utilisateurs dans la révision quotidienne structurée, le suivi de la mémorisation et la planification des cycles de révision du Saint Coran.",
+                "btn-playstore": "Disponible sur Google Play",
+                "app2-title": "Suivi des Écoles & Frais d'Études",
+                "app2-cat": "Productivité / Gestion",
+                "app2-desc": "Une application intuitive pour les parents et tuteurs afin d'organiser la présence des élèves, tenir des journaux de paiement ...",
+                "btn-soon": "En Développement / Bientôt disponible",
+                "ads-title": "AdMob & Vérification",
+                "ads-subtitle": "Fichier officiel app-ads.txt hébergé pour l'identification du développeur.",
+                "ads-desc": "Ce point d'accès public vérifie la propriété développeur de Ribatsoft pour Google AdMob et les réseaux publicitaires :",
+                "ads-link": "Accès direct :",
+                "contact-title": "Support Développeur & Légal",
+                "contact-subtitle": "Des questions, remarques ou demandes de suppression de données ?",
+                "contact-email": "E-mail de support direct :",
+                "link-privacy": "Politique de Confidentialité",
+                "link-terms": "Conditions d'Utilisation",
+                "modal-privacy-title": "Politique de Confidentialité",
+                "modal-privacy-p1": "Chez Ribatsoft, accessible depuis https://ribatsoft.github.io, l'une de nos priorités principales est la confidentialité de nos visiteurs et utilisateurs d'applications.",
+                "modal-privacy-p2": "Les applications Ribatsoft sont conçues pour minimiser la collecte de données. Aucune donnée personnelle n'est vendue ou partagée avec des tiers non autorisés. Les données d'analyse ou de publicité sont traitées strictement via les protocoles standard Google Play Services et AdMob.",
+                "modal-privacy-p3": "Pour toute question ou demande de suppression de données, veuillez nous contacter à ribatsoft@gmail.com.",
+                "modal-terms-title": "Conditions d'Utilisation",
+                "modal-terms-p1": "En téléchargeant ou en utilisant les applications Ribatsoft, ces conditions s'appliquent automatiquement à vous. Assurez-vous de les lire attentivement avant d'utiliser nos applications.",
+                "modal-terms-p2": "Toutes les applications sont fournies 'en l'état' sans garantie d'aucune sorte. Ribatsoft ne peut être tenu responsable des dommages indirects résultant de l'utilisation de l'application.",
+                "footer-text": "© 2026 Ribatsoft. Projet de développeur indépendant. Tous droits réservés."
+            },
+            ar: {
+                "nav-about": "من نحن",
+                "nav-apps": "التطبيقات",
+                "nav-ads": "app-ads.txt",
+                "nav-contact": "التواصل",
+                "hero-badge": "مشروع مطور مستقل",
+                "hero-title": "تطوير تطبيقات جوال بسيطة وعملية",
+                "hero-desc": "رباط سوفت (Ribatsoft) هو مشروع برمجي مستقل يركز على تطوير أدوات تعليمية خفيفة، وتطبيقات للمراجعة اليومية، وحلول رقمية عملية.",
+                "stat-1-title": "مشروع مستقل",
+                "stat-1-desc": "تم التطوير بشغف وعناية",
+                "stat-2-title": "الخصوصية أولاً",
+                "stat-2-desc": "لا أذونات غير ضرورية",
+                "stat-3-title": "موثق لدى AdMob",
+                "stat-3-desc": "ملف app-ads.txt رسمي",
+                "stat-4-title": "دعم مباشر",
+                "stat-4-desc": "ردود سريعة عبر البريد",
+                "about-title": "عن رباط سوفت",
+                "about-subtitle": "الشفافية والالتزام الشخصي بجودة البرمجيات.",
+                "about-p1": "رباط سوفت هي مجموعة أعمال لمطور مستقل مكرس لإنشاء تطبيقات أندرويد عملية مصممة للاستخدام اليومي والتعليم والإنتاجية.",
+                "about-p2": "يركز مشروع رباط سوفت على التطوير الفردي المستقل — مع إعطاء الأولوية للسرعة، والتصميم النظيف، والاحترام الصارم لخصوصية المستخدم وسياسات Google Play.",
+                "apps-title": "التطبيقات المنشورة والقادمة",
+                "apps-subtitle": "استكشف تطبيقاتنا الرسمية المتاحة على متجر Google Play.",
+                "app1-title": "مراجعة القرآن الكريم - Ribatsoft",
+                "app1-cat": "تعليم / أدوات",
+                "app1-desc": "تطبيق مخصص لمساعدة المستخدمين في المراجعة اليومية المنظمة، ومتابعة الحفظ، وجدولة دورات التكرار للقرآن الكريم.",
+                "btn-playstore": "تحميل من Google Play",
+                "app2-title": "متابع المدرسة وأقساط التعليم",
+                "app2-cat": "إنتاجية / إدارة",
+                "app2-desc": "تطبيق سريع ومبسط لأولياء الأمور والمعلمين لتنظيم حضور الأبناء وتسجيل سجلات الدفوعات، .",
+                "btn-soon": "قيد التطوير / قريباً",
+                "ads-title": "التحقق و AdMob",
+                "ads-subtitle": "ملف app-ads.txt رسمي للتحقق من ملكية المطور.",
+                "ads-desc": "هذا الرابط العام يثبت ملكية مطور Ribatsoft بالنسبة لشبكة Google AdMob وشبكات الإعلانات:",
+                "ads-link": "وصول مباشر:",
+                "contact-title": "الدعم والسياسة القانونية",
+                "contact-subtitle": "هل لديك أسئلة، ملاحظات، أو طلب حذف بيانات؟",
+                "contact-email": "البريد الإلكتروني للدعم المباشر:",
+                "link-privacy": "سياسة الخصوصية",
+                "link-terms": "شروط الخدمة",
+                "modal-privacy-title": "سياسة الخصوصية",
+                "modal-privacy-p1": "في رباط سوفت (https://ribatsoft.github.io)، تعد خصوصية زوارنا ومستخدمي تطبيقاتنا من أهم أولوياتنا.",
+                "modal-privacy-p2": "تم تصميم تطبيقات رباط سوفت لتقليل جمع البيانات إلى الحد الأدنى. لا يتم بيع أو مشاركة البيانات الشخصية مع أي أطراف ثالثة. يتم التعامل مع بيانات التحليل أو الإعلانات حصرياً عبر بروتوكولات Google Play Services و AdMob الرسمية.",
+                "modal-privacy-p3": "لأي استفسار أو طلب حذف بيانات، يرجى التواصل معنا عبر البريد: ribatsoft@gmail.com.",
+                "modal-terms-title": "شروط الخدمة",
+                "modal-terms-p1": "بتحميل أو استخدام تطبيقات Ribatsoft، فإن هذه الشروط تنطبق عليك تلقائياً. يرجى قراءتها بعناية قبل الاستخدام.",
+                "modal-terms-p2": "جميع التطبيقات مقدمة 'كما هي' دون أي ضمانات من أي نوع. لا يتحمل Ribatsoft أي مسؤولية عن أي أضرار غير مباشرة ناتجة عن استخدام التطبيقات.",
+                "footer-text": "© 2026 Ribatsoft. مشروع مطور مستقل. جميع الحقوق محفوظة."
             }
         };
 
-        const modalTexts = {
-            en: {
-                privacy: `
-                    <p><strong>Last Updated: 2026</strong></p>
-                    <p>At Ribatsoft, accessible from our official Google Play applications, one of our main priorities is the privacy of our visitors and users. This Privacy Policy document outlines the types of information collected and how it is used.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">1. Information We Collect</h4>
-                    <p>We do not collect personal identification data unless explicitly provided by the user for support inquiries or app synchronization features.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">2. Google Play & Advertising (AdMob)</h4>
-                    <p>Our applications may display third-party advertisements served by Google AdMob. Google uses cookies and device identifiers to serve personalized or non-personalized ads according to user consent choices.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">3. Data Deletion Requests</h4>
-                    <p>Users can request complete deletion of their account data or cached app information by emailing <strong>ribatsoft@gmail.com</strong>.</p>
-                `,
-                terms: `
-                    <p><strong>Terms of Service - Ribatsoft</strong></p>
-                    <p>By downloading or using any mobile application published under the developer profile <strong>Ribatsoft</strong>, you agree to comply with these Terms of Service.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">1. Intellectual Property</h4>
-                    <p>All app assets, UI designs, and software code remain the exclusive property of Ribatsoft.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">2. Usage Rights</h4>
-                    <p>Applications are provided for personal, non-commercial educational and utility purposes.</p>
-                `
-            },
-            fr: {
-                privacy: `
-                    <p><strong>Dernière mise à jour : 2026</strong></p>
-                    <p>Chez Ribatsoft, accessible via nos applications officielles Google Play, la confidentialité de nos utilisateurs est une priorité absolue. Ce document explique la collecte et l'usage des données.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">1. Données Collectées</h4>
-                    <p>Nous ne collectons aucune donnée personnelle à votre insu, sauf transmission volontaire lors d'une demande de support.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">2. Google Play et AdMob</h4>
-                    <p>Nos applications peuvent diffuser des annonces Google AdMob. Google utilise des identifiants anonymes pour personnaliser la publicité selon votre consentement.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">3. Demande de Suppression</h4>
-                    <p>Toute demande de suppression de données peut être adressée directement à <strong>ribatsoft@gmail.com</strong>.</p>
-                `,
-                terms: `
-                    <p><strong>Conditions d'Utilisation - Ribatsoft</strong></p>
-                    <p>En téléchargeant ou utilisant les applications de <strong>Ribatsoft</strong>, vous acceptez les présentes conditions d'utilisation.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">1. Propriété Intellectuelle</h4>
-                    <p>L'ensemble du code, du design et des fonctionnalités reste la propriété exclusive de Ribatsoft.</p>
-                    <h4 class="font-bold text-white mt-4 text-base">2. Usage Autorisé</h4>
-                    <p>Les applications sont fournies à titre personnel pour un usage éducatif ou d'organisation.</p>
-                `
-            }
-        };
-
-        function switchLanguage(lang) {
-            currentLang = lang;
+        function setLanguage(lang) {
             document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
-            const enBtn = document.getElementById('lang-en-btn');
-            const frBtn = document.getElementById('lang-fr-btn');
-            const mobileLabel = document.getElementById('mobile-lang-label');
+            // Update active button state
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
 
-            if (lang === 'en') {
-                enBtn.className = "px-2.5 py-1 rounded-md transition-all bg-ribat-500 text-slate-950 font-bold";
-                frBtn.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all";
-                mobileLabel.textContent = "FR";
-            } else {
-                frBtn.className = "px-2.5 py-1 rounded-md transition-all bg-ribat-500 text-slate-950 font-bold";
-                enBtn.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all";
-                mobileLabel.textContent = "EN";
-            }
-
+            // Translate text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (i18n[lang][key]) {
-                    el.innerHTML = i18n[lang][key];
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
                 }
             });
-
-            document.getElementById('privacy-modal-body').innerHTML = modalTexts[lang].privacy;
-            document.getElementById('terms-modal-body').innerHTML = modalTexts[lang].terms;
-        }
-
-        function toggleLanguage() {
-            switchLanguage(currentLang === 'en' ? 'fr' : 'en');
-        }
-
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
-        function copyAdsTxt() {
-            const text = document.getElementById('app-ads-content').value;
-            const btnText = document.getElementById('copy-btn-text');
-            
-            const temp = document.createElement('textarea');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-
-            const originalText = btnText.innerText;
-            btnText.innerText = currentLang === 'en' ? 'Copied!' : 'Copié !';
-            setTimeout(() => {
-                btnText.innerText = originalText;
-            }, 2000);
         }
 
         function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).style.display = 'flex';
         }
-
         function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).style.display = 'none';
         }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const feedback = document.getElementById('form-feedback');
-            feedback.textContent = currentLang === 'en' 
-                ? 'Thank you! Your message has been sent successfully to ribatsoft@gmail.com.'
-                : 'Merci ! Votre message a été envoyé avec succès à ribatsoft@gmail.com.';
-            feedback.classList.remove('hidden');
-            e.target.reset();
-            setTimeout(() => feedback.classList.add('hidden'), 4000);
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            switchLanguage('en');
-        });
     </script>
 </body>
 </html>
