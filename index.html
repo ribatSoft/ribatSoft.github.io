@@ -12,7 +12,7 @@
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+   
     <style>
         :root {
             --bg-dark: #070a12;
@@ -547,12 +547,12 @@
                         </div>
                     </div>
                     <p class="app-desc" data-i18n="app2-desc">
-                        Une application intuitive pour les parents et tuteurs afin d'organiser la présence des élèves, tenir des journaux de paiement et suivre facilement les progrès éducatifs.
+                        Une application intuitive pour les parents et tuteurs afin d'organiser les études des enfants, tenir des journaux de paiement et suivre facilement les progrès éducatifs.
                     </p>
                 </div>
-                <span class="btn-playstore btn-disabled">
-                    <i class="fa-solid fa-clock"></i> <span data-i18n="btn-soon">En Développement / Bientôt disponible</span>
-                </span>
+                <a href="https://play.google.com/store/apps/details?id=com.ribatsoft.kidsstudypay" target="_blank" class="btn-playstore">
+                    <i class="fa-brands fa-google-play"></i> <span data-i18n="btn-playstore">Disponible sur Google Play</span>
+                </a>
             </div>
 
         </div>
@@ -650,7 +650,7 @@
                 "btn-playstore": "Get it on Google Play",
                 "app2-title": "kids-StudyPay",
                 "app2-cat": "Productivity / Management",
-                "app2-desc": "An intuitive helper app for parents and tutors to organize student attendance, keep payment logs, and track educational progress easily.",
+                "app2-desc": "An intuitive helper app for parents and tutors to organize children attendance, keep payment logs, and track educational progress easily.",
                 "btn-soon": "In Development / Coming Soon",
                 "ads-title": "AdMob & Verification",
                 "ads-subtitle": "Official app-ads.txt file hosted for developer identification.",
@@ -769,6 +769,8 @@
         };
 
         function setLanguage(lang, btn) {
+            //console.log("clicked Amin");
+            
             document.documentElement.lang = lang;
             document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
@@ -796,6 +798,9 @@
                 event.target.style.display = 'none';
             }
         }
+        window.onload = function(){
+        //console.log("page loaded");
+        setLanguage("en",null);}
     </script>
 </body>
 </html>
